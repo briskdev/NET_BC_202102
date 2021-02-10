@@ -7,7 +7,9 @@ namespace Revision
         static void Main(string[] args)
         {
             //Tasks.BirthData();
-            Tasks.Stop();
+            //Tasks.Stop();
+            //Tasks.Hashes();
+            Tasks.Triangle();
 
             Console.Read();
         }
