@@ -8,8 +8,8 @@ namespace Shop
     // Class for the logic
     class ShopManager
     {
-        public Basket Basket { get; set; }
-        public Storage Storage { get; set; }
+        private Basket Basket { get; set; }
+        private Storage Storage { get; set; }
 
         // In the constructor new basket and new storage are created
         public ShopManager()
