@@ -1,0 +1,8 @@
+﻿@model List<Shop.Item>
+ 
+@foreach(var item in Model)
+{
+    <b>@item.Name - $@item.Price</b>
+    <a asp-controller="Home" asp-action="Buy" asp-route-name="@item.Name">Buy</a>
+    <br/>
+}
