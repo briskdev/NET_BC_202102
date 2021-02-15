@@ -1,0 +1,9 @@
+﻿@model List<Shop.Item>
+
+<h1>This is catalog</h1>
+
+@foreach(var item in Model)
+{
+    <b>@item.Name (EUR @item.Price)</b>
+    <br/>
+}

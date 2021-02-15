@@ -6,7 +6,7 @@ using System.Text;
 namespace Shop
 {
     // Class for the logic
-    class ShopManager
+    public class ShopManager
     {
         private Basket Basket { get; set; }
         private Storage Storage { get; set; }

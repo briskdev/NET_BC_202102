@@ -5,7 +5,7 @@ using System.Text;
 namespace Shop
 {
     // Class describes one item
-    class Item
+    public class Item
     {
         public decimal Price { get; set; }
 
