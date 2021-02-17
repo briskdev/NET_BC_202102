@@ -22,7 +22,18 @@ namespace ShopWeb.Controllers
         // for basket
         public IActionResult Basket()
         {
-            return View();
+            List<Item> items = manager.Pay();
+
+            return View(items);
+        }
+
+        // to buy item
+        public IActionResult Buy(string name)
+        {
+            manager.AddToBasket(name);
+
+            // send back to item catalog
+            return RedirectToAction(nameof(Index));
         }
     }
 }

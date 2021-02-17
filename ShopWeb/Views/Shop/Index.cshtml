@@ -5,5 +5,6 @@
 @foreach(var item in Model)
 {
     <b>@item.Name (EUR @item.Price)</b>
+    <a asp-controller="Shop" asp-action="Buy" asp-route-name="@item.Name">Buy</a>
     <br/>
 }
