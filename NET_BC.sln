@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revision", "Revision\Revisi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop", "Shop\Shop.csproj", "{558F5647-FF79-4760-93BD-374162C1C0AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fundamentals", "Fundamentals\Fundamentals.csproj", "{B9680A0E-991A-4967-8207-DE00F07FB41C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fundamentals", "Fundamentals\Fundamentals.csproj", "{B9680A0E-991A-4967-8207-DE00F07FB41C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopWeb", "ShopWeb\ShopWeb.csproj", "{304E0B94-5308-408F-990E-935226CC2A84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopWeb", "ShopWeb\ShopWeb.csproj", "{304E0B94-5308-408F-990E-935226CC2A84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopConsole", "ShopConsole\ShopConsole.csproj", "{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{304E0B94-5308-408F-990E-935226CC2A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{304E0B94-5308-408F-990E-935226CC2A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{304E0B94-5308-408F-990E-935226CC2A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
