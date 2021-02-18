@@ -13,9 +13,12 @@ namespace Library.Logic.Managers
     {
         private LibraryBooks Library { get; set; }
 
+        private UserBooks User { get; set; }
+
         public BookManager()
         {
             Library = new LibraryBooks();
+            User = new UserBooks();
         }
 
         /// <summary>
@@ -34,12 +37,25 @@ namespace Library.Logic.Managers
 
         public List<Book> GetUserBooks()
         {
-            throw new NotImplementedException();
+            return User.Books.ToList();
         }
 
         public Book TakeBook(string title)
         {
-            throw new NotImplementedException();
+            // Take - user takes a book providing its title. Validation if book exists. Validation if book is
+            // still available(check number of copies). Book is added to the user's list and available
+            // book count is decreased.
+
+            var book = Library.Books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+            if(book != null && book.Copies > 0)
+            {
+                book.Copies--;
+                User.Books.Add(book);
+
+                return book;
+            }
+
+            return null;
         }
 
         public void ReturnBook(string title)
