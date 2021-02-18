@@ -2,7 +2,7 @@
 
 @if (Model.Count == 0)
 {
-    <b>There are no books available!</b>
+    <b>You don't have any books!</b>
 }
 else
 {
@@ -11,7 +11,6 @@ else
             <th>Title</th>
             <th>Author</th>
             <th>Year</th>
-            <th style="text-align: center">Copies available</th>
             <th></th>
         </tr>
         @foreach(var book in Model)
@@ -20,8 +19,7 @@ else
                 <td>@book.Title</td>
                 <td>@book.Author</td>
                 <td>@book.Year</td>
-                <td style="text-align: center; color: green; font-weight: bold;">@book.Copies</td>
-                <th><a asp-controller="Book" asp-action="TakeBook" asp-route-title="@book.Title">Take</a></th>
+                <th></th>
             </tr>
         }
     </table>

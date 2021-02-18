@@ -17,5 +17,19 @@ namespace Library.Web.Controllers
 
             return View(books);
         }
+
+        public IActionResult MyBooks()
+        {
+            var books = manager.GetUserBooks();
+
+            return View(books);
+        }
+
+        public IActionResult TakeBook(string title)
+        {
+            manager.TakeBook(title);
+
+            return RedirectToAction(nameof(MyBooks));
+        }
     }
 }
