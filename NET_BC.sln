@@ -11,13 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fundamentals", "Fundamental
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopWeb", "ShopWeb\ShopWeb.csproj", "{304E0B94-5308-408F-990E-935226CC2A84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopConsole", "ShopConsole\ShopConsole.csproj", "{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopConsole", "ShopConsole\ShopConsole.csproj", "{310CC858-C846-4ED8-97C2-AD1F71C0B1A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Console", "Library.Console\Library.Console.csproj", "{DF9A6A6E-7AF8-43DA-8A8F-76889C86E180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Console", "Library.Console\Library.Console.csproj", "{DF9A6A6E-7AF8-43DA-8A8F-76889C86E180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Web", "Library.Web\Library.Web.csproj", "{7FF979EE-6FDD-4A86-9999-5EB755248916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Web", "Library.Web\Library.Web.csproj", "{7FF979EE-6FDD-4A86-9999-5EB755248916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Logic", "Library.Logic\Library.Logic.csproj", "{E6EFEA26-8542-474A-9CC7-0E5B9A52E8CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Logic", "Library.Logic\Library.Logic.csproj", "{E6EFEA26-8542-474A-9CC7-0E5B9A52E8CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTML", "HTML", "{91B2C17D-6F42-4F90-9B96-B57836BAC79B}"
+	ProjectSection(SolutionItems) = preProject
+		sample.html = sample.html
+		style.css = style.css
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

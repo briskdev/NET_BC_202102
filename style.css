@@ -1,0 +1,33 @@
+﻿div.red {
+    background: #ff0000;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.header, .footer, .content, .left-side {
+    background: yellow;
+    padding: 10px;
+    margin: 20px;
+    border: 1px solid blue;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.left-side {
+    float: left;
+    width: 30%;
+}
+
+.content {
+    float: left;
+    width: 50%;
+}
+
+.footer{
+    clear: both;
+}
