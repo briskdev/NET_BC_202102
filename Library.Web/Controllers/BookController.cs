@@ -31,5 +31,13 @@ namespace Library.Web.Controllers
 
             return RedirectToAction(nameof(MyBooks));
         }
+
+        public IActionResult ReturnBook(string title)
+        {
+            manager.ReturnBook(title);
+
+            // send to page
+            return RedirectToAction(nameof(MyBooks));
+        }
     }
 }

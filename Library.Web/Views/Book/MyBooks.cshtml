@@ -19,7 +19,7 @@ else
                 <td>@book.Title</td>
                 <td>@book.Author</td>
                 <td>@book.Year</td>
-                <th></th>
+                <th><a asp-controller="Book" asp-action="ReturnBook" asp-route-title="@book.Title">Return</a></th>
             </tr>
         }
     </table>

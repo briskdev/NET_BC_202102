@@ -35,11 +35,20 @@ namespace Library.Logic.Managers
                 .ToList();
         }
 
+        /// <summary>
+        /// User's books
+        /// </summary>
+        /// <returns></returns>
         public List<Book> GetUserBooks()
         {
             return User.Books.ToList();
         }
 
+        /// <summary>
+        /// Take a book
+        /// </summary>
+        /// <param name="title">Book's title</param>
+        /// <returns></returns>
         public Book TakeBook(string title)
         {
             // Take - user takes a book providing its title. Validation if book exists. Validation if book is
@@ -58,9 +67,27 @@ namespace Library.Logic.Managers
             return null;
         }
 
-        public void ReturnBook(string title)
+        /// <summary>
+        /// User returns a book
+        /// </summary>
+        /// <param name="title">Book's title</param>
+        /// <returns>Book returned (if found)</returns>
+        public Book ReturnBook(string title)
         {
-            throw new NotImplementedException();
+            // Return - user returns a book providing its title. Validation if the book is in the user’s list.
+            // Book is removed from the user’s list and the available count is increased.
+            var userBook = User.Books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+            if(userBook != null)
+            {
+                User.Books.Remove(userBook);
+                // increase available copies
+                var libraryBook = Library.Books.Find(b => b.Title == userBook.Title);
+                libraryBook.Copies++;
+
+                return userBook;
+            }
+
+            return null;
         }
     }
 }
