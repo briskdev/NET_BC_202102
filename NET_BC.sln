@@ -21,6 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Logic", "Library.Lo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTML", "HTML", "{91B2C17D-6F42-4F90-9B96-B57836BAC79B}"
 	ProjectSection(SolutionItems) = preProject
+		bootstrap.html = bootstrap.html
 		sample.html = sample.html
 		style.css = style.css
 		Task2.css = Task2.css
