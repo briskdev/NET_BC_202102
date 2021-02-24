@@ -1,0 +1,32 @@
+﻿
+.box {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    margin: 10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.box-1 {
+    border: 1px solid red;
+    color: red;
+}
+
+.box-2 {
+    border: 2px double blue;
+    color: blue;
+}
+
+.box-3 {
+    border: 1px solid black;
+    color: black;
+}
+
+.box-4 {
+    border: 1px solid black;
+    background: black;
+    color: white;
+}
