@@ -22,8 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTML", "HTML", "{91B2C17D-6F42-4F90-9B96-B57836BAC79B}"
 	ProjectSection(SolutionItems) = preProject
 		bootstrap.html = bootstrap.html
-		..\..\..\..\Desktop\160h\newsapp.css = ..\..\..\..\Desktop\160h\newsapp.css
-		..\..\..\..\Desktop\160h\NewsApp_Main.html = ..\..\..\..\Desktop\160h\NewsApp_Main.html
+		newsapp.css = newsapp.css
+		NewsApp_Main.html = NewsApp_Main.html
 		sample.html = sample.html
 		style.css = style.css
 		Task2.css = Task2.css
