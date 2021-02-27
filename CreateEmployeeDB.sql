@@ -1,4 +1,5 @@
-﻿CREATE TABLE Employees(
+﻿-- Table employees
+CREATE TABLE Employees(
 	Emp_Id INT NOT NULL,
 	Emp_Name NVARCHAR(50) NOT NULL,
 	Emp_Job_Name NVARCHAR(50) NOT NULL,
@@ -8,12 +9,14 @@
 	Emp_Department_Id INT NOT NULL
 )
 
+-- Table Salary grades
 CREATE TABLE Salary_Grades(
 	Grade_Id INT NOT NULL,
 	Grade_Min_Salary INT NOT NULL,
 	Grade_Max_Salary INT NOT NULL
 )
 
+-- Table Departments
 CREATE TABLE Departments(
 	Dep_Id INT NOT NULL,
 	Dep_Name NVARCHAR(50) NOT NULL,
