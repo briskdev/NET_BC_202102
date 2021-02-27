@@ -4,6 +4,9 @@
    UserId INT NOT NULL
 )
 
+ALTER TABLE UserPets
+ALTER COLUMN PetName NVARCHAR(20) NULL;
+
 INSERT INTO UserPets(Id, PetName, UserId)
 VALUES (1, 'Cat', 2)
 
