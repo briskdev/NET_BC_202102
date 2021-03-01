@@ -33,9 +33,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTML", "HTML", "{91B2C17D-6
 		Task2.html = Task2.html
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsWeb", "NewsWeb\NewsWeb.csproj", "{4936F261-F9AC-42B9-8F5E-3A230613C836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsWeb", "NewsWeb\NewsWeb.csproj", "{4936F261-F9AC-42B9-8F5E-3A230613C836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLogic", "NewsLogic\NewsLogic.csproj", "{D5C13F5A-D4E0-4A91-AE02-46462CB5C136}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsLogic", "NewsLogic\NewsLogic.csproj", "{D5C13F5A-D4E0-4A91-AE02-46462CB5C136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDb", "SampleDb\SampleDb.csproj", "{7EC3D8E2-8EA2-492A-86E7-998F55049C15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{D5C13F5A-D4E0-4A91-AE02-46462CB5C136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5C13F5A-D4E0-4A91-AE02-46462CB5C136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5C13F5A-D4E0-4A91-AE02-46462CB5C136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EC3D8E2-8EA2-492A-86E7-998F55049C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC3D8E2-8EA2-492A-86E7-998F55049C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC3D8E2-8EA2-492A-86E7-998F55049C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC3D8E2-8EA2-492A-86E7-998F55049C15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

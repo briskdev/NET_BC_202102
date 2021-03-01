@@ -1,6 +1,7 @@
 ﻿using Library.Logic.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -29,10 +30,44 @@ namespace Library.Logic.Managers
         {
             // Book list - shows all the available books in the library (ordered by title). 
             // Corresponding message if there are no more books in the list.
-            return Library.Books
+            /*
+             return Library.Books
                 .Where(b => b.Copies > 0)
                 .OrderBy(b => b.Title)
                 .ToList();
+            */
+
+            List<Book> result = new List<Book>();
+
+            string cs = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Briska\source\LibraryDB.mdf;Integrated Security=True;Connect Timeout=30";
+            using(SqlConnection conn = new SqlConnection(cs))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM Books WHERE Copies > 0 ORDER BY Title";
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            Book book = new Book()
+                            {
+                                Author = Convert.ToString(reader["Author"]),
+                                Title = Convert.ToString(reader["Title"]),
+                                Copies = Convert.ToInt32(reader["Copies"]),
+                                Year = Convert.ToInt32(reader["Year"]),
+                            };
+
+                            result.Add(book);
+                        }
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return result;
         }
 
         /// <summary>
