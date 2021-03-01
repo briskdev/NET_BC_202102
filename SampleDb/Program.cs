@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SampleDb.DB;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace SampleDb
 {
@@ -36,6 +39,24 @@ namespace SampleDb
                 }
 
                 connection.Close();
+            }
+
+            Console.WriteLine("2nd approach - Entity Framework");
+
+            // II - Entity Framework
+            // 1. Add reference to Nuget Package "Microsoft.EntityFrameworkCore.Tools" 3.1.X version
+            // 2. Add reference to Nuget Package "Microsoft.EntityFrameworkCore.SqlServer" 3.1.X version
+            // 3. Use Package Manager Console (select correct active project) and scaffold database:
+            //    Scaffold-DbContext "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\XX\MyFirstDb.mdf;Integrated Security=True;Connect Timeout=30" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -Context SampleDatabase
+            // 4. Use generated classes
+            using(SampleDatabase db = new SampleDatabase())
+            {
+                List<Users> users = db.Users.OrderBy(u => u.RegisteredOn).ToList();
+
+                foreach(var u in users)
+                {
+                    Console.WriteLine("User {0} {1}, created {2}", u.FirstName, u.LastName, u.RegisteredOn);
+                }
             }
         }
     }
