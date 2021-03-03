@@ -1,4 +1,5 @@
 ﻿using Library.Logic.Data;
+using Library.Logic.DB;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,62 +13,24 @@ namespace Library.Logic.Managers
     /// </summary>
     public class BookManager
     {
-        private LibraryBooks Library { get; set; }
-
-        private UserBooks User { get; set; }
 
         public BookManager()
         {
-            Library = new LibraryBooks();
-            User = new UserBooks();
+            
         }
 
         /// <summary>
         /// Returns list of all available books
         /// </summary>
         /// <returns></returns>
-        public List<Book> GetAvailableBooks()
+        public List<Books> GetAvailableBooks()
         {
             // Book list - shows all the available books in the library (ordered by title). 
             // Corresponding message if there are no more books in the list.
-            /*
-             return Library.Books
-                .Where(b => b.Copies > 0)
-                .OrderBy(b => b.Title)
-                .ToList();
-            */
-
-            List<Book> result = new List<Book>();
-
-            string cs = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Briska\source\LibraryDB.mdf;Integrated Security=True;Connect Timeout=30";
-            using(SqlConnection conn = new SqlConnection(cs))
+            using(var db = new LibraryDb())
             {
-                conn.Open();
-
-                string query = "SELECT * FROM Books WHERE Copies > 0 ORDER BY Title";
-                using(SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    using(SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while(reader.Read())
-                        {
-                            Book book = new Book()
-                            {
-                                Author = Convert.ToString(reader["Author"]),
-                                Title = Convert.ToString(reader["Title"]),
-                                Copies = Convert.ToInt32(reader["Copies"]),
-                                Year = Convert.ToInt32(reader["Year"]),
-                            };
-
-                            result.Add(book);
-                        }
-                    }
-                }
-
-                conn.Close();
+                return db.Books.Where(b => b.Copies > 0).OrderBy(b => b.Title).ToList();
             }
-
-            return result;
         }
 
         /// <summary>
@@ -84,19 +47,31 @@ namespace Library.Logic.Managers
         /// </summary>
         /// <param name="title">Book's title</param>
         /// <returns></returns>
-        public Book TakeBook(string title)
+        public Books TakeBook(string title)
         {
             // Take - user takes a book providing its title. Validation if book exists. Validation if book is
             // still available(check number of copies). Book is added to the user's list and available
             // book count is decreased.
 
-            var book = Library.Books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
-            if(book != null && book.Copies > 0)
-            {
-                book.Copies--;
-                User.Books.Add(book);
+            //var book = Library.Books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+            //if(book != null && book.Copies > 0)
+            //{
+            //    book.Copies--;
+            //    User.Books.Add(book);
 
-                return book;
+            //    return book;
+            //}
+            using(var db = new LibraryDb())
+            {
+                // 1. Look for book inside table 'Books' by Title
+
+                // 2. If book is found and is still available:
+
+                // 2.1. Decrease available copies
+
+                // 2.2. Insert new record in table 'UserBooks'
+
+                db.SaveChanges();
             }
 
             return null;
