@@ -1,5 +1,4 @@
-﻿using Library.Logic.Data;
-using Library.Logic.DB;
+﻿using Library.Logic.DB;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -37,9 +36,12 @@ namespace Library.Logic.Managers
         /// User's books
         /// </summary>
         /// <returns></returns>
-        public List<Book> GetUserBooks()
+        public List<UserBooks> GetUserBooks()
         {
-            return User.Books.ToList();
+            using(var db = new LibraryDb())
+            {
+                return db.UserBooks.OrderBy(b => b.Title).ToList();
+            }
         }
 
         /// <summary>
@@ -52,26 +54,27 @@ namespace Library.Logic.Managers
             // Take - user takes a book providing its title. Validation if book exists. Validation if book is
             // still available(check number of copies). Book is added to the user's list and available
             // book count is decreased.
-
-            //var book = Library.Books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
-            //if(book != null && book.Copies > 0)
-            //{
-            //    book.Copies--;
-            //    User.Books.Add(book);
-
-            //    return book;
-            //}
             using(var db = new LibraryDb())
             {
                 // 1. Look for book inside table 'Books' by Title
-
+                var book = db.Books.FirstOrDefault(b => b.Title.ToLower() == title.ToLower());
                 // 2. If book is found and is still available:
+                if(book != null && book.Copies > 0)
+                {
+                    // 2.1. Decrease available copies
+                    book.Copies--;
+                    // 2.2. Insert new record in table 'UserBooks'
+                    db.UserBooks.Add(new UserBooks()
+                    {
+                        Author = book.Author,
+                        Title = book.Title,
+                        Year = book.Year,
+                    });
 
-                // 2.1. Decrease available copies
+                    db.SaveChanges();
 
-                // 2.2. Insert new record in table 'UserBooks'
-
-                db.SaveChanges();
+                    return book;
+                }
             }
 
             return null;
@@ -82,19 +85,30 @@ namespace Library.Logic.Managers
         /// </summary>
         /// <param name="title">Book's title</param>
         /// <returns>Book returned (if found)</returns>
-        public Book ReturnBook(string title)
+        public UserBooks ReturnBook(string title)
         {
             // Return - user returns a book providing its title. Validation if the book is in the user’s list.
             // Book is removed from the user’s list and the available count is increased.
-            var userBook = User.Books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
-            if(userBook != null)
+            // 1. Use the DB
+            // 2. Find the book in 'UserBooks' by title
+            // 3. If book is found:
+            // 3.1. Delete it from 'UserBooks'
+            // 3.2. Increase Copies count for the same book inside the 'Books' table
+            using(var db = new LibraryDb())
             {
-                User.Books.Remove(userBook);
-                // increase available copies
-                var libraryBook = Library.Books.Find(b => b.Title == userBook.Title);
-                libraryBook.Copies++;
+                var userBook = db.UserBooks.FirstOrDefault(b => b.Title.ToLower() == title.ToLower());
+                if(userBook != null)
+                {
+                    db.UserBooks.Remove(userBook);
 
-                return userBook;
+                    // increase availabe count
+                    var libraryBook = db.Books.FirstOrDefault(b => b.Title.ToLower() == title.ToLower());
+                    libraryBook.Copies++;
+
+                    db.SaveChanges();
+
+                    return userBook;
+                }
             }
 
             return null;
