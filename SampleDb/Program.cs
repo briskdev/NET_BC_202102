@@ -49,6 +49,45 @@ namespace SampleDb
             // 3. Use Package Manager Console (select correct active project) and scaffold database:
             //    Scaffold-DbContext "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\XX\MyFirstDb.mdf;Integrated Security=True;Connect Timeout=30" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DB -Context SampleDatabase
             // 4. Use generated classes
+
+            // To add data:
+            using (SampleDatabase db = new SampleDatabase())
+            {
+                db.Users.Add(new Users()
+                {
+                    FirstName = "New",
+                    LastName = "User",
+                    RegisteredOn = DateTime.Now,
+                });
+
+                db.SaveChanges();
+            }
+
+            // To modify data:
+            using (SampleDatabase db = new SampleDatabase())
+            {
+                var user = db.Users.FirstOrDefault(u => u.LastName == "User");
+                if(user != null)
+                {
+                    user.LastName = "updated user";
+                }
+
+                db.SaveChanges();
+            }
+
+            // To delete data:
+            using (SampleDatabase db = new SampleDatabase())
+            {
+                var user = db.Users.FirstOrDefault(u => u.LastName == "Smith");
+                if(user != null)
+                {
+                    db.Users.Remove(user);
+                }
+
+                db.SaveChanges();
+            }
+
+            // To select data:
             using(SampleDatabase db = new SampleDatabase())
             {
                 List<Users> users = db.Users.OrderBy(u => u.RegisteredOn).ToList();

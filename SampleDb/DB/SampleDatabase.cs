@@ -42,9 +42,9 @@ namespace SampleDb.DB
 
             modelBuilder.Entity<Users>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.Property(e => e.FirstName).HasMaxLength(50);
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.LastName)
                     .IsRequired()
