@@ -1,19 +1,12 @@
-﻿<ul class="nav nav-pills mb-3">
-    <li class="nav-item">
-        <a class="nav-link active" href="#">Latvijā</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Ārvalstīs</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Kriminālziņas</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Sports</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Auto</a>
-    </li>
+﻿@model List<NewsLogic.DB.Topics>
+
+<ul class="nav nav-pills mb-3">
+    @foreach (var topic in Model)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="#">@topic.Title</a>
+        </li>
+    }
 </ul>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
