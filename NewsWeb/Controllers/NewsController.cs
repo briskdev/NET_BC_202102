@@ -29,8 +29,14 @@ namespace NewsWeb.Controllers
             return View(model);
         }
 
-        public IActionResult Article()
+        public IActionResult Article(int? id)
         {
+            if(id.HasValue)
+            {
+                // one specific article is selected
+                // TODO: retrieve info from the DB
+            }
+
             return View();
         }
     }
