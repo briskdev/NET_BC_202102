@@ -17,5 +17,13 @@ namespace NewsLogic.Managers
                 return db.Topics.OrderBy(t => t.Title).ToList();
             }
         }
+
+        public Topics GetTopic(int id)
+        {
+            using(var db = new NewsDb())
+            {
+                return db.Topics.FirstOrDefault(t => t.Id == id);
+            }
+        }
     }
 }

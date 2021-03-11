@@ -16,5 +16,18 @@ namespace NewsLogic.Managers
                 return db.Articles.OrderByDescending(a => a.PublishedOn).Take(count).ToList();
             }
         }
+
+        public List<Articles> GetByTopic(int topicId)
+        {
+            using(var db = new NewsDb())
+            {
+                return db.Articles
+                    // under specific topic
+                    .Where(a => a.TopicId == topicId)
+                    // latest first
+                    .OrderByDescending(a => a.PublishedOn)
+                    .ToList();
+            }
+        }
     }
 }
