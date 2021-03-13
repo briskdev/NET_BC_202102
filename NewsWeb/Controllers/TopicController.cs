@@ -26,11 +26,21 @@ namespace NewsWeb.Controllers
             // if valid -> save and send to another page
             if(ModelState.IsValid)
             {
-                // manager call
-                manager.CreateNew(model.Title);
+                // custom validations
+                // ...
+                //ModelState.AddModelError("validation", "Topic already exists!");
 
-                // send to start
-                return RedirectToAction("Topics", "News");
+                // manager call
+                var result = manager.CreateNew(model.Title);
+                if(String.IsNullOrEmpty(result))
+                {
+                    // send to start
+                    return RedirectToAction("Topics", "News");
+                }
+                else
+                {
+                    ModelState.AddModelError("validation", result);
+                }
             }
 
             // if not valid -> return back to the same view

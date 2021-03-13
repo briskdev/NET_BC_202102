@@ -26,16 +26,22 @@ namespace NewsLogic.Managers
             }
         }
 
-        public void CreateNew(string title)
+        public string CreateNew(string title)
         {
             using(var db = new NewsDb())
             {
+                // do validations
+                // return error message for custom validations
+
                 db.Topics.Add(new Topics()
                 {
                     Title = title,
                 });
 
                 db.SaveChanges();
+
+                // All OK
+                return null;
             }
         }
     }
