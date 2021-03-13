@@ -25,5 +25,18 @@ namespace NewsLogic.Managers
                 return db.Topics.FirstOrDefault(t => t.Id == id);
             }
         }
+
+        public void CreateNew(string title)
+        {
+            using(var db = new NewsDb())
+            {
+                db.Topics.Add(new Topics()
+                {
+                    Title = title,
+                });
+
+                db.SaveChanges();
+            }
+        }
     }
 }
