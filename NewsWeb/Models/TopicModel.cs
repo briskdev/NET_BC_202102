@@ -9,7 +9,10 @@ namespace NewsWeb.Models
     public class TopicModel
     {
         [Required]
-        [Display(Name = "Category name")]
+        [Display(Name = "Topic name")]
         public string Title { get; set; }
+
+        [Display(Name = "Topic description")]
+        public string Description { get; set; }
     }
 }
