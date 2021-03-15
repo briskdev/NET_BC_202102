@@ -17,6 +17,7 @@ namespace NewsWeb.Controllers
         public IActionResult Create()
         {
             TopicModel model = new TopicModel();
+            model.Topics = manager.GetAllTopics();
 
             return View(model);
         }
