@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewsLogic;
 using NewsLogic.Managers;
 using NewsWeb.Models;
 using System;
@@ -24,22 +25,18 @@ namespace NewsWeb.Controllers
         public IActionResult Create(TopicModel model)
         {
             // if valid -> save and send to another page
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                // custom validations
-                // ...
-                //ModelState.AddModelError("validation", "Topic already exists!");
+                try
+                {
+                    // manager call
+                    manager.CreateNew(model.Title);
 
-                // manager call
-                var result = manager.CreateNew(model.Title);
-                if(String.IsNullOrEmpty(result))
-                {
-                    // send to start
-                    return RedirectToAction("Topics", "News");
+                    return RedirectToAction(nameof(Create));
                 }
-                else
+                catch(LogicException ex)
                 {
-                    ModelState.AddModelError("validation", result);
+                    ModelState.AddModelError("validation", ex.Message);
                 }
             }
 
