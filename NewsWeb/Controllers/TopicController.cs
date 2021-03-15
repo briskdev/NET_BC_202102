@@ -38,6 +38,11 @@ namespace NewsWeb.Controllers
                 {
                     ModelState.AddModelError("validation", ex.Message);
                 }
+                catch(Exception ex)
+                {
+                    // some other unexpected error
+                    ModelState.AddModelError("validation", ex.Message);
+                }
             }
 
             // if not valid -> return back to the same view
