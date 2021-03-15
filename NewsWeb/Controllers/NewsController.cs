@@ -29,15 +29,21 @@ namespace NewsWeb.Controllers
             return View(model);
         }
 
+        // single article
         public IActionResult Article(int? id)
         {
+            ArticleModel model = new ArticleModel();
             if(id.HasValue)
             {
                 // one specific article is selected
-                // TODO: retrieve info from the DB
+                // select * from Articles
+                model.Article = articles.GetById(id.Value);
+                model.Topics = topics.GetAllTopics();
+                // select * from Topics Where Id = Article.TopicId
+                model.ArticleTopic = topics.GetTopic(model.Article.TopicId);
             }
 
-            return View();
+            return View(model);
         }
     }
 }

@@ -29,5 +29,13 @@ namespace NewsLogic.Managers
                     .ToList();
             }
         }
+
+        public Articles GetById(int id)
+        {
+            using(var db = new NewsDb())
+            {
+                return db.Articles.FirstOrDefault(a => a.Id == id);
+            }
+        }
     }
 }

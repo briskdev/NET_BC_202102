@@ -1,33 +1,26 @@
-﻿<ul class="nav nav-pills mb-3">
-    <li class="nav-item">
-        <a class="nav-link active" href="#">Latvijā</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Ārvalstīs</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Kriminālziņas</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Sports</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Auto</a>
-    </li>
+﻿@model ArticleModel
+
+<ul class="nav nav-pills mb-3">
+    @foreach(var topic in Model.Topics)
+    {
+        <li class="nav-item">
+            <a class="nav-link @(topic.Id == Model.ArticleTopic.Id ? "active" : "")" asp-controller="News" asp-action="Topics" asp-route-id="@topic.Id">@topic.Title</a>
+        </li>
+    }
 </ul>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">Latvijā</li>
-        <li class="breadcrumb-item active" aria-current="page">Ziņas virsraksts</li>
+        <li class="breadcrumb-item" aria-current="page">@Model.ArticleTopic.Title</li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Article.Title</li>
     </ol>
 </nav>
 <div>
-    <h1>Ziņas virsraksts</h1>
-    <h5>Autors <span class="text-secondary">Pievienošanas laiks</span></h5>
+    <h1>@Model.Article.Title</h1>
+    <h5>@Model.Article.Author <span class="text-secondary">@Model.Article.PublishedOn</span></h5>
     <div>
         <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text></svg>
     </div>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris magna nunc, pretium sed ipsum eget, sodales rutrum ante. Phasellus nec leo tempus, tincidunt metus in, eleifend metus. Nulla ut nisi sed leo feugiat fermentum. Sed aliquam pharetra nisi, id euismod nisl imperdiet quis. Morbi non arcu est. Nunc rutrum orci nec enim suscipit, nec dictum nisl tincidunt. In at semper lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis pellentesque sem ut felis malesuada, sit amet viverra velit lobortis.
+        @Model.Article.Text
     </p>
 </div>

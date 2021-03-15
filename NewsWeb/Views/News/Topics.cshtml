@@ -4,7 +4,7 @@
     @foreach (var topic in Model.Topics)
     {
         <li class="nav-item">
-            <a class="nav-link" asp-controller="News" asp-action="Topics" asp-route-id="@topic.Id">@topic.Title</a>
+            <a class="nav-link @(topic.Id == Model.ActiveTopic?.Id ? "active" : "")" asp-controller="News" asp-action="Topics" asp-route-id="@topic.Id">@topic.Title</a>
         </li>
     }
 </ul>
