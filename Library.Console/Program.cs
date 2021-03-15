@@ -9,82 +9,90 @@ namespace Library.Console
 
         static void Main(string[] args)
         {
-            System.Console.WriteLine("Welcome to the Library!");
-
-            // library book list
-            var books = manager.GetAvailableBooks();
-            if(books.Count == 0)
+            try
             {
-                System.Console.WriteLine("There are no available books at the moment!");
-            }
-            else
-            {
-                books.ForEach(book =>
+                System.Console.WriteLine("Welcome to the Library!");
+
+                // library book list
+                var books = manager.GetAvailableBooks();
+                if (books.Count == 0)
                 {
-                    System.Console.WriteLine("{0} ({1}) {2}", book.Title, book.Author, book.Year);
-                });
-
-                // book borrowing
-                while(true)
-                {
-                    System.Console.Write("Enter book's title (or stop): ");
-                    string input = System.Console.ReadLine();
-
-                    if(input == "stop")
-                    {
-                        break;
-                    }
-
-                    var book = manager.TakeBook(input);
-                    if(book != null)
-                    {
-                        System.Console.WriteLine("Book {0} borrowed!", book.Title);
-                    }
-                    else
-                    {
-                        // book == NULL
-                        System.Console.WriteLine("Book is not available!");
-                    }
-                }
-
-                // user's book list
-                System.Console.WriteLine("Your books: ");
-                var myBooks = manager.GetUserBooks();
-                if (myBooks.Count == 0)
-                {
-                    System.Console.WriteLine("You haven't taken any books!");
+                    System.Console.WriteLine("There are no available books at the moment!");
                 }
                 else
                 {
-                    myBooks.ForEach(book =>
+                    books.ForEach(book =>
                     {
                         System.Console.WriteLine("{0} ({1}) {2}", book.Title, book.Author, book.Year);
                     });
-                }
 
-                // book return
-                System.Console.WriteLine("Return some books?");
-                while (true)
-                {
-                    System.Console.Write("Enter book's title (or stop): ");
-                    string input = System.Console.ReadLine();
-
-                    if (input == "stop")
+                    // book borrowing
+                    while (true)
                     {
-                        break;
+                        System.Console.Write("Enter book's title (or stop): ");
+                        string input = System.Console.ReadLine();
+
+                        if (input == "stop")
+                        {
+                            break;
+                        }
+
+                        var book = manager.TakeBook(input);
+                        if (book != null)
+                        {
+                            System.Console.WriteLine("Book {0} borrowed!", book.Title);
+                        }
+                        else
+                        {
+                            // book == NULL
+                            System.Console.WriteLine("Book is not available!");
+                        }
                     }
 
-                    var book = manager.ReturnBook(input);
-                    if (book != null)
+                    // user's book list
+                    System.Console.WriteLine("Your books: ");
+                    var myBooks = manager.GetUserBooks();
+                    if (myBooks.Count == 0)
                     {
-                        System.Console.WriteLine("Book {0} returned!", book.Title);
+                        System.Console.WriteLine("You haven't taken any books!");
                     }
                     else
                     {
-                        // book == NULL
-                        System.Console.WriteLine("You don't have this book!");
+                        myBooks.ForEach(book =>
+                        {
+                            System.Console.WriteLine("{0} ({1}) {2}", book.Title, book.Author, book.Year);
+                        });
+                    }
+
+                    // book return
+                    System.Console.WriteLine("Return some books?");
+                    while (true)
+                    {
+                        System.Console.Write("Enter book's title (or stop): ");
+                        string input = System.Console.ReadLine();
+
+                        if (input == "stop")
+                        {
+                            break;
+                        }
+
+                        var book = manager.ReturnBook(input);
+                        if (book != null)
+                        {
+                            System.Console.WriteLine("Book {0} returned!", book.Title);
+                        }
+                        else
+                        {
+                            // book == NULL
+                            System.Console.WriteLine("You don't have this book!");
+                        }
                     }
                 }
+            }
+            // catch all exception
+            catch(Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
             }
         }
     }
