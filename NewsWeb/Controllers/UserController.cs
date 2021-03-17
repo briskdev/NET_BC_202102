@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using NewsLogic;
 using NewsLogic.Managers;
 using NewsWeb.Models;
@@ -57,12 +58,20 @@ namespace NewsWeb.Controllers
                 }
                 else
                 {
-                    // user found, user is not null
+                    HttpContext.Session.SetString("username", user.Username);
+
                     return RedirectToAction("Index", "Home");
                 }
             }
 
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
