@@ -1,0 +1,26 @@
+﻿@model List<NewsLogic.DB.Articles>
+
+<h1>Articles</h1>
+
+<a class="btn btn-primary" asp-controller="News" asp-action="Create">Create</a>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+    @foreach(var article in Model)
+    {
+        <tr>
+            <td>@article.Id</td>
+            <td>@article.Title</td>
+            <td>@article.Author</td>
+            <td>@article.PublishedOn</td>
+            <td>
+                <a asp-controller="News" asp-action="Delete" asp-route-id="@article.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
