@@ -37,5 +37,42 @@ namespace NewsLogic.Managers
                 return db.Articles.FirstOrDefault(a => a.Id == id);
             }
         }
+
+        public List<Articles> GetAll()
+        {
+            using(var db = new NewsDb())
+            {
+                return db.Articles.OrderByDescending(a => a.PublishedOn).ToList();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using(var db = new NewsDb())
+            {
+                var article = db.Articles.FirstOrDefault(a => a.Id == id);
+                db.Articles.Remove(article);
+
+                db.SaveChanges();
+            }
+        }
+
+        public void Create(int topicId, string title, string text, string author)
+        {
+            using(var db = new NewsDb())
+            {
+                db.Articles.Add(new Articles()
+                {
+                    Author = author,
+                    PublishedOn = DateTime.Now,
+                    Text = text,
+                    Title = title,
+                    TopicId = topicId,
+                    Image = "",
+                });
+
+                db.SaveChanges();
+            }
+        }
     }
 }
