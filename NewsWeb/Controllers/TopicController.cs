@@ -55,5 +55,29 @@ namespace NewsWeb.Controllers
             // if not valid -> return back to the same view
             return View(model);
         }
+
+        public IActionResult Index()
+        {
+            if(!HttpContext.Session.GetIsAdmin())
+            {
+                return NotFound();
+            }
+
+            var topics = manager.GetAllTopics();
+
+            return View(topics);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            if (!HttpContext.Session.GetIsAdmin())
+            {
+                return NotFound();
+            }
+
+            manager.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
