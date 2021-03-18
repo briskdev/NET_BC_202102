@@ -16,6 +16,12 @@ namespace NewsWeb.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            // Page available only to administrators
+            if(!HttpContext.Session.GetIsAdmin())
+            {
+                return NotFound();
+            }
+
             TopicModel model = new TopicModel();
             model.Topics = manager.GetAllTopics();
 

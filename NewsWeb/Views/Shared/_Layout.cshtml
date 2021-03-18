@@ -26,10 +26,10 @@
                     <li class="nav-item @(ViewContext.RouteData.Values["action"].ToString() == "About" ? "active" : "")">
                         <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
                     </li>
-                    @if (Context.Session.Keys.Contains("username"))
+                    @if (Context.Session.IsSignedIn())
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hello, @Context.Session.GetString("username")</a>
+                            <a class="nav-link" href="#">Hello, @Context.Session.GetUsername()</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="User" asp-action="Logout">Sign out</a>

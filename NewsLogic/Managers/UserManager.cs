@@ -27,7 +27,7 @@ namespace NewsLogic.Managers
                     throw new LogicException("That e-mail is already in use!");
                 }
                 //3.3. (Optional) Check if password is at least 6 symbols
-                if(password.Length < 6)
+                if(!password.IsPasswordOk())
                 {
                     throw new LogicException("Password should be at least 6 symbols!");
                 }

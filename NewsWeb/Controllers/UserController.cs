@@ -17,6 +17,11 @@ namespace NewsWeb.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if(HttpContext.Session.IsSignedIn())
+            {
+                return NotFound();
+            }
+
             return View();
         }
 
@@ -43,6 +48,11 @@ namespace NewsWeb.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            if (HttpContext.Session.IsSignedIn())
+            {
+                return NotFound();
+            }
+
             return View();
         }
 
@@ -58,7 +68,8 @@ namespace NewsWeb.Controllers
                 }
                 else
                 {
-                    HttpContext.Session.SetString("username", user.Username);
+                    HttpContext.Session.SetUsername(user.Username);
+                    HttpContext.Session.SetIsAdmin(user.IsAdmin);
 
                     return RedirectToAction("Index", "Home");
                 }
