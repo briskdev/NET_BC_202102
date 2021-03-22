@@ -79,6 +79,7 @@ namespace NewsWeb.Controllers
             }
 
             var model = new CreateArticleModel();
+            model.Author = HttpContext.Session.GetUsername();
             model.Topics = topics.GetAllTopics();
 
             return View(model);
@@ -92,6 +93,8 @@ namespace NewsWeb.Controllers
                 try
                 {
                     articles.Create(model.TopicId, model.Title, model.Text, model.Author);
+
+                    return RedirectToAction(nameof(Index));
                 }
                 catch(LogicException ex)
                 {
@@ -99,6 +102,7 @@ namespace NewsWeb.Controllers
                 }
             }
 
+            model.Topics = topics.GetAllTopics();
             return View(model);
         }
     }
