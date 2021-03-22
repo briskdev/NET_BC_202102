@@ -74,5 +74,25 @@ namespace NewsLogic.Managers
                 db.SaveChanges();
             }
         }
+
+        // CRUD operations (Create-Read-Update-Delete)
+
+        public void Update(int id, int topicId, string title, string text, string author)
+        {
+            using(var db = new NewsDb())
+            {
+                // I - Retrieve
+                var data = db.Articles.FirstOrDefault(a => a.Id == id);
+
+                // II - Modify
+                data.Author = author;
+                data.Text = text;
+                data.Title = title;
+                data.TopicId = topicId;
+
+                // III - Commit
+                db.SaveChanges();
+            }
+        }
     }
 }

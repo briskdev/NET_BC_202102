@@ -19,6 +19,7 @@
             <td>@article.Author</td>
             <td>@article.PublishedOn</td>
             <td>
+                <a asp-controller="News" asp-action="Create" asp-route-id="@article.Id">Edit</a>
                 <a asp-controller="News" asp-action="Delete" asp-route-id="@article.Id">Delete</a>
             </td>
         </tr>

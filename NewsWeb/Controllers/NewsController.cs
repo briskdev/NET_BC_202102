@@ -71,7 +71,7 @@ namespace NewsWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
             if (!HttpContext.Session.GetIsAdmin())
             {
@@ -81,6 +81,16 @@ namespace NewsWeb.Controllers
             var model = new CreateArticleModel();
             model.Author = HttpContext.Session.GetUsername();
             model.Topics = topics.GetAllTopics();
+
+            if(id.HasValue)
+            {
+                var data = articles.GetById(id.Value);
+                model.Author = data.Author;
+                model.Id = data.Id;
+                model.Text = data.Text;
+                model.Title = data.Title;
+                model.TopicId = data.TopicId;
+            }
 
             return View(model);
         }
@@ -92,7 +102,15 @@ namespace NewsWeb.Controllers
             {
                 try
                 {
-                    articles.Create(model.TopicId, model.Title, model.Text, model.Author);
+                    if (model.Id == 0)
+                    {
+                        articles.Create(model.TopicId, model.Title, model.Text, model.Author);
+                    }
+                    else
+                    {
+                        // id is defined -> update
+                        articles.Update(model.Id, model.TopicId, model.Title, model.Text, model.Author);
+                    }
 
                     return RedirectToAction(nameof(Index));
                 }

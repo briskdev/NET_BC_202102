@@ -27,5 +27,7 @@ namespace NewsWeb.Models
         public string Author { get; set; }
 
         public List<Topics> Topics { get; set; }
+
+        public int Id { get; set; }
     }
 }
