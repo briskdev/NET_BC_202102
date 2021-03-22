@@ -14,7 +14,7 @@ namespace NewsWeb.Controllers
         private TopicManager manager = new TopicManager();
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
             // Page available only to administrators
             if(!HttpContext.Session.GetIsAdmin())
@@ -24,6 +24,14 @@ namespace NewsWeb.Controllers
 
             TopicModel model = new TopicModel();
             model.Topics = manager.GetAllTopics();
+
+            // id ID is defined -> topic editing
+            if(id.HasValue)
+            {
+                var data = manager.GetTopic(id.Value);
+                model.Title = data.Title;
+                model.Id = data.Id;
+            }
 
             return View(model);
         }
@@ -36,10 +44,19 @@ namespace NewsWeb.Controllers
             {
                 try
                 {
-                    // manager call
-                    manager.CreateNew(model.Title);
+                    // if id is not set -> creating a new topic
+                    if(model.Id == 0)
+                    {
+                        // manager call
+                        manager.CreateNew(model.Title);
+                    }
+                    // ID is defined -> editing topic
+                    else
+                    {
+                        manager.Update(model.Id, model.Title);
+                    }
 
-                    return RedirectToAction(nameof(Create));
+                    return RedirectToAction(nameof(Index));
                 }
                 catch(LogicException ex)
                 {
