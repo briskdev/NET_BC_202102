@@ -56,6 +56,55 @@ namespace NewsWeb.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            // Page available only to administrators
+            if (!HttpContext.Session.GetIsAdmin())
+            {
+                return NotFound();
+            }
+
+            // topic from DB
+            var data = manager.GetTopic(id);
+
+            TopicModel model = new TopicModel();
+            model.Topics = manager.GetAllTopics();
+            // fill in model with a data from DB
+            model.Title = data.Title;
+            model.Id = data.Id;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(TopicModel model)
+        {
+            // if valid -> save and send to another page
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // manager call
+                    manager.Update(model.Id, model.Title);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (LogicException ex)
+                {
+                    ModelState.AddModelError("validation", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    // some other unexpected error
+                    ModelState.AddModelError("validation", ex.Message);
+                }
+            }
+
+            // if not valid -> return back to the same view
+            return View(model);
+        }
+
         public IActionResult Index()
         {
             if(!HttpContext.Session.GetIsAdmin())

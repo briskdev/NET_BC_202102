@@ -63,5 +63,20 @@ namespace NewsLogic.Managers
                 db.SaveChanges();
             }
         }
+
+        public void Update(int id, string title)
+        {
+            using(var db = new NewsDb())
+            {
+                // find the topic
+                var topic = db.Topics.FirstOrDefault(t => t.Id == id);
+
+                // modify it's data
+                topic.Title = title;
+
+                // save changes
+                db.SaveChanges();
+            }
+        }
     }
 }

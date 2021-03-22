@@ -21,5 +21,7 @@ namespace NewsWeb.Models
         public int? ParentTopicId { get; set; }
 
         public List<Topics> Topics { get; set; }
+
+        public int Id { get; set; }
     }
 }
