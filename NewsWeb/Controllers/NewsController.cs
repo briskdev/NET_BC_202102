@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewsLogic;
 using NewsLogic.Managers;
 using NewsWeb.Models;
 using System;
@@ -67,6 +68,38 @@ namespace NewsWeb.Controllers
             articles.Delete(id);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            if (!HttpContext.Session.GetIsAdmin())
+            {
+                return NotFound();
+            }
+
+            var model = new CreateArticleModel();
+            model.Topics = topics.GetAllTopics();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateArticleModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    articles.Create(model.TopicId, model.Title, model.Text, model.Author);
+                }
+                catch(LogicException ex)
+                {
+                    ModelState.AddModelError("validation", ex.Message);
+                }
+            }
+
+            return View(model);
         }
     }
 }
