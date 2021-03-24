@@ -9,8 +9,4 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Library.Logic\Library.Logic.csproj" />
-  </ItemGroup>
-
 </Project>
