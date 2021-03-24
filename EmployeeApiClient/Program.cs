@@ -12,7 +12,7 @@ namespace EmployeeApiClient
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://dummy.restapiexample.com/api/v1/");
 
-            // 1. Display all emplyees
+            // 1. Display all employees
             Console.WriteLine("Employees:");
 
             // using method 'employees'
@@ -31,7 +31,21 @@ namespace EmployeeApiClient
                 }
             }
 
-            // 2. 
+            // 2. Get some employee
+            Console.WriteLine("Enter employee id: ");
+            int id = int.Parse(Console.ReadLine());
+
+            var res2 = client.GetAsync("employee/" + id).Result; // employee/5 or employee/1
+            if(res2.IsSuccessStatusCode)
+            {
+                // result for single employee data
+                SingleEmployee employee = res2.Content.ReadAsAsync<SingleEmployee>().Result;
+
+                Console.WriteLine("Information:");
+                Console.WriteLine("Name: {0}", employee.data.employee_name);
+                Console.WriteLine("Age: {0}", employee.data.employee_age);
+                Console.WriteLine("Salary: EUR {0}", employee.data.employee_salary);
+            }
 
             Console.Read();
         }
