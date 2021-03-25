@@ -1,4 +1,5 @@
-﻿using NewsLogic.DB;
+﻿using Microsoft.AspNetCore.Http;
+using NewsLogic.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,5 +30,8 @@ namespace NewsWeb.Models
         public List<Topics> Topics { get; set; }
 
         public int Id { get; set; }
+
+        [Display(Name = "Poster")]
+        public IFormFile Image { get; set; }
     }
 }

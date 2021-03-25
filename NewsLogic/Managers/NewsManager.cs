@@ -57,7 +57,7 @@ namespace NewsLogic.Managers
             }
         }
 
-        public void Create(int topicId, string title, string text, string author)
+        public void Create(int topicId, string title, string text, string author, string image = "")
         {
             using(var db = new NewsDb())
             {
@@ -68,7 +68,7 @@ namespace NewsLogic.Managers
                     Text = text,
                     Title = title,
                     TopicId = topicId,
-                    Image = "",
+                    Image = image,
                 });
 
                 db.SaveChanges();
@@ -77,7 +77,7 @@ namespace NewsLogic.Managers
 
         // CRUD operations (Create-Read-Update-Delete)
 
-        public void Update(int id, int topicId, string title, string text, string author)
+        public void Update(int id, int topicId, string title, string text, string author, string image = "")
         {
             using(var db = new NewsDb())
             {
@@ -89,6 +89,10 @@ namespace NewsLogic.Managers
                 data.Text = text;
                 data.Title = title;
                 data.TopicId = topicId;
+                if(!String.IsNullOrEmpty(image))
+                {
+                    data.Image = image;
+                }
 
                 // III - Commit
                 db.SaveChanges();

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using NewsLogic;
 using NewsLogic.Managers;
 using NewsWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +15,12 @@ namespace NewsWeb.Controllers
     {
         private TopicManager topics = new TopicManager();
         private NewsManager articles = new NewsManager();
+        private IWebHostEnvironment webHost;
 
+        public NewsController(IWebHostEnvironment host)
+        {
+            webHost = host;
+        }
 
         public IActionResult Topics(int? id)
         {
@@ -102,14 +109,15 @@ namespace NewsWeb.Controllers
             {
                 try
                 {
+                    string image = UploadImage(model);
                     if (model.Id == 0)
                     {
-                        articles.Create(model.TopicId, model.Title, model.Text, model.Author);
+                        articles.Create(model.TopicId, model.Title, model.Text, model.Author, image);
                     }
                     else
                     {
                         // id is defined -> update
-                        articles.Update(model.Id, model.TopicId, model.Title, model.Text, model.Author);
+                        articles.Update(model.Id, model.TopicId, model.Title, model.Text, model.Author, image);
                     }
 
                     return RedirectToAction(nameof(Index));
@@ -122,6 +130,26 @@ namespace NewsWeb.Controllers
 
             model.Topics = topics.GetAllTopics();
             return View(model);
+        }
+
+        private string UploadImage(CreateArticleModel model)
+        {
+            string fileName = null;
+
+            if(model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(webHost.WebRootPath, "ArticleImages");
+                //cfd9906f-a702-4ae7-b92f-94823bc0da3f_sample.png
+                fileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string fullFilePath = Path.Combine(uploadsFolder, fileName);
+
+                using(var fileStream = new FileStream(fullFilePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+            }
+
+            return fileName;
         }
     }
 }

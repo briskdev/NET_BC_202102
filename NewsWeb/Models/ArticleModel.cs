@@ -13,5 +13,7 @@ namespace NewsWeb.Models
         public Topics ArticleTopic { get; set; }
 
         public List<Topics> Topics { get; set; }
+
+        public string Image { get; set; }
     }
 }

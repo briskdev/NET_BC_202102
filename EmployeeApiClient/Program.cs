@@ -7,6 +7,30 @@ namespace EmployeeApiClient
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("OMDB API client");
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://www.omdbapi.com/");
+
+            // search for Batman movies
+            Console.Write("Search movie by title: ");
+            string title = Console.ReadLine();
+            var res = client.GetAsync(String.Format("?apikey=fa5c6c0a&s={0}", title)).Result;
+
+            if(res.IsSuccessStatusCode)
+            {
+                SearchMoviesResult movies = res.Content.ReadAsAsync<SearchMoviesResult>().Result;
+
+                Console.WriteLine("Movies in the IMDB: ");
+                foreach(var m in movies.Search)
+                {
+                    Console.WriteLine("Title: {0}, year {1}", m.Title, m.Year);
+                }
+            }
+        }
+
+        static void Main2(string[] args)
+        {
             Console.WriteLine("Employee API client");
 
             var client = new HttpClient();
