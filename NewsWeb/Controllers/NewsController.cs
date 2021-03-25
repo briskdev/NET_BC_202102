@@ -49,6 +49,8 @@ namespace NewsWeb.Controllers
                 model.Topics = topics.GetAllTopics();
                 // select * from Topics Where Id = Article.TopicId
                 model.ArticleTopic = topics.GetTopic(model.Article.TopicId);
+
+                model.Image = model.Article.Image;
             }
 
             return View(model);
